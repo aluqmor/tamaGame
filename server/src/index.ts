@@ -23,7 +23,7 @@ const io = new Server(httpServer, {
 });
 
 io.on('connection', (socket) => {
-    socket.emit("connection", { status: true });
+    socket.emit("connectionStatus", { status: true });
     const player : Player = {
         id: socket,
         x: 0,
