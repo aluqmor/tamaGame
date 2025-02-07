@@ -19,7 +19,7 @@ export class Board {
         const { size, elements } = payload;
         this.#map = new Array(size).fill().map(() => new Array(size).fill(0));
         elements.forEach(element => {
-            if (element.type === 'bush') { // recorre el tablero buscando las posiciones de los arbustos y de los jugadores
+            if (element.type === 'bush') {
                 this.#map[element.x][element.y] = ELEMENTS.bush;
             } else if (element.type === 'player') {
                 this.#map[element.x][element.y] = ELEMENTS.players;

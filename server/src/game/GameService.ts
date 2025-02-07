@@ -28,7 +28,7 @@ export class GameService {
             y: 0,
             state: PlayerStates.Idle,
             direction: Directions.Up,
-            visibility: true
+            visibility: true,
         }
     }
 
@@ -38,13 +38,11 @@ export class GameService {
         ServerService.getInstance().sendMessage(room.name, Messages.NEW_PLAYER, "new player");
         const genRanHex = (size: Number) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
         if (room.players.length == 1) {
-            const boardBuilder = new BoardBuilder(); // instancio una vez la clase boardBuilder aqui para instanciar 2 veces debajo:
             const game: Game = {
                 id: "game" + genRanHex(128),
                 state: GameStates.WAITING,
                 room: room,
-                board: boardBuilder.getBoard(), // la primera, para obtener el tablero
-                playerPositions: boardBuilder.getStartingPositions() // la segunda, para obtener las posiciones iniciales
+                board: new BoardBuilder().getBoard()
             }
             room.game = game;
             this.games.push(game);

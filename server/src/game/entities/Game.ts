@@ -14,6 +14,5 @@ export interface Game {
     id : String,
     state: GameStates,
     room: Room,
-    board: Board,
-    playerPositions: Array<{x: number, y: number}> 
+    board: Board
 }

@@ -2,23 +2,22 @@ import { Board } from "./entities/Board";
 
 export class BoardBuilder {
     private board: Board;
-    private playerPositions: Array<{x: number, y: number}>; // creo un array para guardar las posiciones iniciales de los jugadores
+    private initialPlayerPositions: Array<{x: number, y: number}>; 
     
     constructor() {
-        // estas posiciones van a ser las 4 esquinas del tablero
-        this.playerPositions = [
-            {x: 0, y: 0},  
-            {x: 0, y: 7},  
-            {x: 7, y: 0},  
-            {x: 7, y: 7}   
-        ];
-
         this.board = {
-            size: 10,
+            size: 8, 
             elements: []
         }
+
+        this.initialPlayerPositions = [
+            {x: 0, y: 0},  
+            {x: 0, y: this.board.size - 1},  
+            {x: this.board.size - 1, y: 0},  
+            {x: this.board.size - 1, y: this.board.size - 1}   
+        ];
+
         const map : Array<number[]> = [
-            // he quitado los 1 del mapa para manejar las posiciones de los jugadores aparte
             [0,0,0,0,0,0,0,0],
             [0,0,0,0,0,5,0,0],
             [0,5,0,0,0,0,0,0],
@@ -36,9 +35,14 @@ export class BoardBuilder {
                 }
     }
 
-    // metodo par obtener las posiciones iniciales
-    public getStartingPositions(): Array<{x: number, y: number}> {
-        return this.playerPositions;
+    public getRandomStartingPositions(): Array<{x: number, y: number}> {
+        const randomPositions: Array<{x: number, y: number}> = [];
+        while (this.initialPlayerPositions.length > 0) {
+            const random = Math.floor(Math.random() * this.initialPlayerPositions.length);
+            const position = this.initialPlayerPositions.splice(random, 1)[0];
+            randomPositions.push(position);
+        }
+        return randomPositions;
     }
 
     public getBoard(): Board {

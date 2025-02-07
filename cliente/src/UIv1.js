@@ -16,10 +16,10 @@ UIv1.drawBoard = (board) => {
         board.forEach(element => element.forEach((element) => {
             const tile = document.createElement("div");
             tile.classList.add("tile");
-            if (element === ELEMENTS.bush) { // si el elemento que llega es arbusto le agrego la clase bush
+            if (element === ELEMENTS.bush) { 
                 console.log('llega un arbusto');
                 tile.classList.add("bush");
-            } else if (element === ELEMENTS.players) { // si el elemento que llega es jugador le agrego la clase player
+            } else if (element === ELEMENTS.players) { 
                 console.log('llega un jugador');
                 tile.classList.add("player");
             }
