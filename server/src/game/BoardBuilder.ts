@@ -46,6 +46,10 @@ export class BoardBuilder {
     }
 
     public getBoard(): Board {
+        const positions = this.getRandomStartingPositions();
+        positions.forEach(pos => {
+            this.board.elements.push({x: pos.x, y: pos.y, type: 'player'});
+        });
         return this.board;
     }
 }
