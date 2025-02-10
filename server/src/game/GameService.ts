@@ -5,6 +5,7 @@ import { RoomService } from "../room/RoomService";
 import { Game, GameStates, Messages } from "./entities/Game";
 import { BoardBuilder } from "./BoardBuilder";
 import { ServerService } from "../server/ServerService"
+
 export class GameService {
     private games: Game[];
 

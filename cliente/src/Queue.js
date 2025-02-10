@@ -16,6 +16,6 @@ export class Queue {
     };
 
     isEmpty() {
-        return this.#queue.lenth == 0;
+        return this.#queue.length == 0;
     }
 }

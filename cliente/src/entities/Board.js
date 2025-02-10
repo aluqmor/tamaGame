@@ -1,6 +1,6 @@
 export const ELEMENTS = {
     bush : 5,
-    players: 1, // guardo los jugadores en ELEMENTS 
+    players: 1, 
 };
 
 export class Board {

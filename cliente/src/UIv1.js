@@ -17,10 +17,8 @@ UIv1.drawBoard = (board) => {
             const tile = document.createElement("div");
             tile.classList.add("tile");
             if (element === ELEMENTS.bush) { 
-                console.log('llega un arbusto');
                 tile.classList.add("bush");
             } else if (element === ELEMENTS.players) { 
-                console.log('llega un jugador');
                 tile.classList.add("player");
             }
             base.appendChild(tile);
