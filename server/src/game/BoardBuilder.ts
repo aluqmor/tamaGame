@@ -1,4 +1,4 @@
-import { Board } from "./entities/Board";
+import { Board, PlayerElement } from "./entities/Board";
 
 export class BoardBuilder {
     private board: Board;
@@ -47,8 +47,14 @@ export class BoardBuilder {
 
     public getBoard(): Board {
         const positions = this.getRandomStartingPositions();
-        positions.forEach(pos => {
-            this.board.elements.push({x: pos.x, y: pos.y, type: 'player'});
+        positions.forEach((pos, index) => {
+            const player: PlayerElement = {
+                x: pos.x,
+                y: pos.y,
+                type: 'player',
+                player: index + 1
+            };
+            this.board.elements.push(player);
         });
         return this.board;
     }

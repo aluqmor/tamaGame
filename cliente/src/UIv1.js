@@ -18,8 +18,9 @@ UIv1.drawBoard = (board) => {
             tile.classList.add("tile");
             if (element === ELEMENTS.bush) { 
                 tile.classList.add("bush");
-            } else if (element === ELEMENTS.players) { 
+            } else if (element >= ELEMENTS.player1 && element <= ELEMENTS.player4) { 
                 tile.classList.add("player");
+                tile.textContent = `Player ${element}`;
             }
             base.appendChild(tile);
             anime({
