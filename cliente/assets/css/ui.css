@@ -30,3 +30,30 @@
     align-items: center; 
     justify-content: center; 
 }
+
+.game-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+.control-button:hover {
+    background-color: #357be2;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}

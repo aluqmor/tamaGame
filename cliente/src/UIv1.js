@@ -5,6 +5,7 @@ export const UIv1 = UI_BUILDER.init();
 UIv1.initUI = () => {
     const base = document.getElementById(UIv1.uiElements.board);
     base.classList.add("board");
+    UIv1.drawControls();
 }
 
 UIv1.drawBoard = (board) => {
@@ -33,5 +34,25 @@ UIv1.drawBoard = (board) => {
     }
 }
 
-UIv1.drawBoard();
+UIv1.drawControls = () => {
+    const controlsContainer = document.getElementById(UIv1.uiElements.controls);
+    controlsContainer.classList.add("controls");
+
+    const moveButton = document.createElement("button");
+    moveButton.textContent = "Mover";
+    moveButton.classList.add("control-button");
+    moveButton.addEventListener("click", () => {
+        // logica para mover al jugador
+    });
+
+    const rotateButton = document.createElement("button");
+    rotateButton.textContent = "Rotar";
+    rotateButton.classList.add("control-button");
+    rotateButton.addEventListener("click", () => {
+        // logica para rotar al jugador
+    });
+
+    controlsContainer.appendChild(moveButton);
+    controlsContainer.appendChild(rotateButton);
+}
 

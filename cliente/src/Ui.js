@@ -1,8 +1,10 @@
 const UI = {
     drawBoard: () => { throw new TypeError('Debes cambiar este método para usarlo!') },
     initUI: ()  => { throw new TypeError('Debes cambiar este método para usarlo!') },
+    drawControls: () => { throw new TypeError('Debes cambiar este método para usarlo!') },
     uiElements : {
-        board : "board"
+        board : "board",
+        controls: "controls"
     }
 }
 
