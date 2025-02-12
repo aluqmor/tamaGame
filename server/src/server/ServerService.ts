@@ -1,7 +1,7 @@
 import { DefaultEventsMap, Server, Socket } from 'socket.io';
 import http from 'http';
 import { GameService } from '../game/GameService';
-import { AnyTxtRecord } from 'dns';
+import { RoomService } from '../room/RoomService';
 
 export class ServerService {
     private io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any> | null;
@@ -47,7 +47,9 @@ export class ServerService {
         this.active = true;
 
         this.io.on('connection', (socket) => {
+            console.log('Un cliente se ha conectado:', socket.id);
             socket.emit("connectionStatus", { status: true });
+            // he intentado hacer que se guarden los ids en las posiciones del tablero pero no he podido
             GameService.getInstance().addPlayer(GameService.getInstance().buildPlayer(socket));
             
             socket.on("message", (data)=>{
