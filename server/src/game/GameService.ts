@@ -42,7 +42,14 @@ export class GameService {
             player.x = pos.x;
             player.y = pos.y;
         }
-        ServerService.getInstance().sendMessage(room.name, Messages.NEW_PLAYER, "new player");
+        ServerService.getInstance().sendMessage(room.name, Messages.NEW_PLAYER, {
+            id: player.id.id,
+            x: player.x,
+            y: player.y,
+            state: player.state,
+            direction: player.direction,
+            visibility: player.visibility,
+        });
         const genRanHex = (size: Number) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
         if (room.players.length == 1) {
             const game: Game = {
@@ -60,6 +67,7 @@ export class GameService {
                 room.game.state = GameStates.PLAYING;
                 if (ServerService.getInstance().isActive()) {
                     ServerService.getInstance().sendMessage(room.name, Messages.BOARD, room.game.board);
+                    ServerService.getInstance().sendMessage(room.name, Messages.CONTROLS, {});
                 }
             }
             return true;

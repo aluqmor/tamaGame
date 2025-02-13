@@ -49,7 +49,6 @@ export class ServerService {
         this.io.on('connection', (socket) => {
             console.log('Un cliente se ha conectado:', socket.id);
             socket.emit("connectionStatus", { status: true });
-            // he intentado hacer que se guarden los ids en las posiciones del tablero pero no he podido
             GameService.getInstance().addPlayer(GameService.getInstance().buildPlayer(socket));
             
             socket.on("message", (data)=>{

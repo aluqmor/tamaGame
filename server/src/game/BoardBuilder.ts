@@ -3,8 +3,6 @@ import { Board, PlayerElement } from "./entities/Board";
 export class BoardBuilder {
     private board: Board;
     private initialPlayerPositions: Array<{x: number, y: number}>; 
-    // no puedo sacar las posiciones aleatorias de los arbustos haciendo que alrededor no tengan jugadores ni otros arbustos
-    // lo unico que se me ha ocurrido es guardar las posiciones de alrededor de los arbustos en un array y luego sacar una posicion aleatoria
     
     constructor() {
         this.board = {

@@ -9,13 +9,15 @@ export class GameService {
     #ui = null;
     #players = [];
     #board = null;
+    #controls = null;
     #queue = null;
     #state = null;
     #parallel = null;
 
     #actionsList = {
         "NEW_PLAYER" : this.do_newPlayer.bind(this),
-        "BOARD" : this.do_newBoard.bind(this)
+        "BOARD" : this.do_newBoard.bind(this),
+        "CONTROLS" : this.do_newControls.bind(this)
     };
 
     constructor(ui){
@@ -61,6 +63,10 @@ export class GameService {
     async do_newBoard(payload) {
         this.#board.build(payload);
         this.#ui.drawBoard(this.#board.map);
+    }
+
+    async do_newControls(payload) {
+        this.#ui.drawControls();
     }
     
 }

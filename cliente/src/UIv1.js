@@ -1,11 +1,11 @@
 import { UI_BUILDER } from "./Ui.js";
 import { ELEMENTS } from "./entities/Board.js";
+import { ConnectionHandler } from "./services/ConnectionHandler.js";
 export const UIv1 = UI_BUILDER.init();
 
 UIv1.initUI = () => {
     const base = document.getElementById(UIv1.uiElements.board);
     base.classList.add("board");
-    UIv1.drawControls();
 }
 
 UIv1.drawBoard = (board) => {
@@ -42,17 +42,24 @@ UIv1.drawControls = () => {
     moveButton.textContent = "Mover";
     moveButton.classList.add("control-button");
     moveButton.addEventListener("click", () => {
-        // logica para mover al jugador
+        
     });
 
     const rotateButton = document.createElement("button");
     rotateButton.textContent = "Rotar";
     rotateButton.classList.add("control-button");
     rotateButton.addEventListener("click", () => {
-        // logica para rotar al jugador
+        
+    });
+
+    const shootButton = document.createElement("button");
+    shootButton.textContent = "Disparar";
+    shootButton.classList.add("control-button");
+    shootButton.addEventListener("click", () => {
+        
     });
 
     controlsContainer.appendChild(moveButton);
     controlsContainer.appendChild(rotateButton);
+    controlsContainer.appendChild(shootButton);
 }
-
