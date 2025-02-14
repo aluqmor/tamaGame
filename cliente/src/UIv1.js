@@ -34,6 +34,18 @@ UIv1.drawBoard = (board) => {
     }
 }
 
+UIv1.movePlayer = () => {
+    console.log("Moviendo jugador");
+}
+
+UIv1.rotatePlayer = () => {
+    console.log("Rotando jugador");
+}
+
+UIv1.shootPlayer = () => {
+    console.log("Disparando");
+}
+
 UIv1.drawControls = () => {
     const controlsContainer = document.getElementById(UIv1.uiElements.controls);
     controlsContainer.classList.add("controls");
@@ -42,21 +54,21 @@ UIv1.drawControls = () => {
     moveButton.textContent = "Mover";
     moveButton.classList.add("control-button");
     moveButton.addEventListener("click", () => {
-        
+        UIv1.movePlayer();
     });
 
     const rotateButton = document.createElement("button");
     rotateButton.textContent = "Rotar";
     rotateButton.classList.add("control-button");
     rotateButton.addEventListener("click", () => {
-        
+        UIv1.rotatePlayer();
     });
 
     const shootButton = document.createElement("button");
     shootButton.textContent = "Disparar";
     shootButton.classList.add("control-button");
     shootButton.addEventListener("click", () => {
-        
+        UIv1.shootPlayer();
     });
 
     controlsContainer.appendChild(moveButton);

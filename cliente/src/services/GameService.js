@@ -17,7 +17,10 @@ export class GameService {
     #actionsList = {
         "NEW_PLAYER" : this.do_newPlayer.bind(this),
         "BOARD" : this.do_newBoard.bind(this),
-        "CONTROLS" : this.do_newControls.bind(this)
+        "CONTROLS" : this.do_newControls.bind(this),
+        "MOVE" : this.do_move.bind(this),
+        "ROTATE" : this.do_rotate.bind(this),
+        "SHOOT" : this.do_shoot.bind(this)
     };
 
     constructor(ui){
@@ -67,6 +70,18 @@ export class GameService {
 
     async do_newControls(payload) {
         this.#ui.drawControls();
+    }
+
+    async do_move(payload) {
+        this.#ui.movePlayer();
+    }
+
+    async do_rotate(payload) {
+        this.#ui.rotatePlayer();
+    }
+
+    async do_shoot(payload) {
+        this.#ui.shootPlayer();
     }
     
 }

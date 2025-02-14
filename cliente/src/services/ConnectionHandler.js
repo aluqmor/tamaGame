@@ -13,8 +13,6 @@ export const ConnectionHandler = {
         socket.onAny((message, payload) => {
             console.log("Esta llegando: ");
             console.log(payload);
-            console.log(payload.type);
-            console.log(payload.content);
 
           });
 
