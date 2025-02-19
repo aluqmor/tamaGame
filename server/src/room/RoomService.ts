@@ -33,6 +33,10 @@ export class RoomService {
         return room;
     }
 
+    public getRoomByPlayerId(playerId: string): Room | undefined {
+        return this.rooms.find(room => room.players.some(player => player.id.id === playerId));
+    }
+
     public addPlayer(player: Player) : Room {
         const room : Room = this.getRoom();
         room.players.push(player);

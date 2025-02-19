@@ -20,7 +20,11 @@ export class ServerService {
             {
                 type: "BYE",
                 do: this.doBye
-            }
+            },
+            {
+                type: "MOVE",
+                do: this.doMove
+            },
         ];
 
     private static instance: ServerService;
@@ -95,5 +99,9 @@ export class ServerService {
     private doBye(data: String) {
         console.log("Adios");
         console.log(data);
+    }
+
+    private doMove(data: any) {
+        GameService.getInstance().movePlayer(data.playerId, data.newX, data.newY);
     }
 }

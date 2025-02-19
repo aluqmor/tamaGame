@@ -73,7 +73,7 @@ export class GameService {
     }
 
     async do_move(payload) {
-        this.#ui.movePlayer();
+        this.#ui.movePlayer(payload);
     }
 
     async do_rotate(payload) {

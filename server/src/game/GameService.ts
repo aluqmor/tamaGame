@@ -75,4 +75,26 @@ export class GameService {
 
         return false;
     }
+
+    public movePlayer(playerId: string, newX: number, newY: number): boolean {
+        const room = RoomService.getInstance().getRoomByPlayerId(playerId);
+        if (!room || !room.game) return false;
+    
+        const occupied = room.game.board.elements.some(tile => tile.x === newX && tile.y === newY);
+        if (occupied) {
+            return false;
+        }
+    
+        const player = room.players.find(player => player.id.id === playerId);
+        if (!player) return false;
+        player.x = newX;
+        player.y = newY;
+    
+        ServerService.getInstance().sendMessage(room.name, "MOVE", {
+            id: playerId,
+            x: newX,
+            y: newY,
+        });
+        return true;
+    }
 }

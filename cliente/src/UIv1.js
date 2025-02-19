@@ -3,6 +3,14 @@ import { ELEMENTS } from "./entities/Board.js";
 import { ConnectionHandler } from "./services/ConnectionHandler.js";
 export const UIv1 = UI_BUILDER.init();
 
+UIv1.currentBoard = null;
+
+UIv1.player = {
+    x: 0,
+    y: 0,
+    direction: 'down' 
+};
+
 UIv1.initUI = () => {
     const base = document.getElementById(UIv1.uiElements.board);
     base.classList.add("board");
@@ -10,6 +18,7 @@ UIv1.initUI = () => {
 
 UIv1.drawBoard = (board) => {
     if (board !== undefined) {
+        UIv1.currentBoard = board;
         const base = document.getElementById(UIv1.uiElements.board);
         base.innerHTML = '';
         base.style.gridTemplateColumns = `repeat(${board.length}, 100px)`;
@@ -34,9 +43,41 @@ UIv1.drawBoard = (board) => {
     }
 }
 
-UIv1.movePlayer = () => {
-    console.log("Moviendo jugador");
-}
+UIv1.movePlayer = (payload) => {
+    if (payload && payload.x !== undefined && payload.y !== undefined) {
+        if (payload.id === ConnectionHandler.socket.id) {
+            UIv1.player.x = payload.x;
+            UIv1.player.y = payload.y;
+        }
+    }
+    
+    let { x, y, direction } = UIv1.player;
+    let newX = x;
+    let newY = y;
+    
+    switch (direction) {
+        case 'up':
+            newX = x - 1;
+            break;
+        case 'down':
+            newX = x + 1;
+            break;
+        case 'left':
+            newY = y - 1;
+            break;
+        case 'right':
+            newY = y + 1;
+            break;
+    }
+    
+    UIv1.player.x = newX;
+    UIv1.player.y = newY;
+    
+    ConnectionHandler.socket.emit("message", { 
+        type: "MOVE", 
+        content: { playerId: ConnectionHandler.socket.id, newX, newY }
+    });
+};
 
 UIv1.rotatePlayer = () => {
     console.log("Rotando jugador");
