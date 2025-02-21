@@ -35,27 +35,21 @@ export class BoardBuilder {
                 }
     }
 
-    public getRandomStartingPositions(): Array<{x: number, y: number}> {
-        const randomPositions: Array<{x: number, y: number}> = [];
-        while (this.initialPlayerPositions.length > 0) {
-            const random = Math.floor(Math.random() * this.initialPlayerPositions.length);
-            const position = this.initialPlayerPositions.splice(random, 1)[0];
-            randomPositions.push(position);
-        }
-        return randomPositions;
+    public getRandomStartingPosition(): {x: number, y: number} {
+        const random = Math.floor(Math.random() * this.initialPlayerPositions.length);
+        const position = this.initialPlayerPositions.splice(random, 1)[0];
+        return position;
     }
 
     public getBoard(): Board {
-        const positions = this.getRandomStartingPositions();
-        positions.forEach((pos, index) => {
-            const player: PlayerElement = {
-                x: pos.x,
-                y: pos.y,
-                type: 'player',
-                player: index + 1
-            };
-            this.board.elements.push(player);
-        });
+        const position = this.getRandomStartingPosition();
+        const player: PlayerElement = {
+            x: position.x,
+            y: position.y,
+            type: 'player',
+            player: 1
+        };
+        this.board.elements.push(player);
         return this.board;
     }
 }

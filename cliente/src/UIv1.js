@@ -51,9 +51,9 @@ UIv1.movePlayer = (payload) => {
         }
     }
     
-    let { x, y, direction } = UIv1.player;
-    let newX = x;
-    let newY = y;
+    const { x, y, direction } = UIv1.player;
+    const newX = x;
+    const newY = y;
     
     switch (direction) {
         case 'up':

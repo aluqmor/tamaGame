@@ -36,12 +36,9 @@ export class GameService {
     public addPlayer(player: Player): boolean {
         const room: Room = RoomService.getInstance().addPlayer(player);
         //ServerService.getInstance().sendMessage(room.name,ServerService.messages.out.new_player,"new player");
-        const initialPositions = new BoardBuilder().getRandomStartingPositions();
-        if (initialPositions.length > 0) {
-            const pos = initialPositions[0];
-            player.x = pos.x;
-            player.y = pos.y;
-        }
+        const initialPositions = new BoardBuilder().getRandomStartingPosition();
+        player.x = initialPositions.x;
+        player.y = initialPositions.y;
         ServerService.getInstance().sendMessage(room.name, Messages.NEW_PLAYER, {
             id: player.id.id,
             x: player.x,
@@ -68,6 +65,7 @@ export class GameService {
                 if (ServerService.getInstance().isActive()) {
                     ServerService.getInstance().sendMessage(room.name, Messages.BOARD, room.game.board);
                     ServerService.getInstance().sendMessage(room.name, Messages.CONTROLS, {});
+                    ServerService.getInstance().sendMessage(room.name, Messages.NEW_PLAYER, room.game.board.elements); 
                 }
             }
             return true;
