@@ -33,15 +33,22 @@ export class RoomService {
         return room;
     }
 
-    public getRoomByPlayerId(playerId: string): Room | undefined {
-        return this.rooms.find(room => room.players.some(player => player.id.id === playerId));
+    public getRoomByPlayerId(id: string): Room | null {
+        const roomOfPlayer = this.rooms.find(room => room.players.some(player => player.id?.id === id));
+        if (roomOfPlayer) return roomOfPlayer;
+        console.log("Room not found for player id:", id);
+        return null;
     }
 
-    public addPlayer(player: Player) : Room {
-        const room : Room = this.getRoom();
+    public addPlayer(player: Player): Room {
+        const room: Room = this.getRoom();
         room.players.push(player);
-        ServerService.getInstance().addPlayerToRoom(player.id,room.name);
+        ServerService.getInstance().addPlayerToRoom(player.id, room.name);
         if (room.players.length == RoomConfig.maxRoomPlayers) room.occupied = true;
-        return room;  
+        return room;
+    }
+
+    public findPlayer(playerId: string): Player | undefined {
+        return this.rooms.flatMap(room => room.players).find(player => player.id.id === playerId);
     }
 }

@@ -20,7 +20,8 @@ export class GameService {
         "CONTROLS" : this.do_newControls.bind(this),
         "MOVE" : this.do_move.bind(this),
         "ROTATE" : this.do_rotate.bind(this),
-        "SHOOT" : this.do_shoot.bind(this)
+        "SHOOT" : this.do_shoot.bind(this),
+        "GAME_START" : this.do_gameStart.bind(this),
     };
 
     constructor(ui){
@@ -60,7 +61,16 @@ export class GameService {
     };
 
     async do_newPlayer (payload) {
+        console.log("payload: ", payload);
         console.log("ha llegado un jugador nuevo");
+        this.#ui.players.push({
+            id: payload.id,
+            x: 0,
+            y: 0,
+            direction: payload.direction,
+            visibility: payload.visibility,
+            state :payload.state
+        });
     };
 
     async do_newBoard(payload) {
@@ -83,5 +93,10 @@ export class GameService {
     async do_shoot(payload) {
         this.#ui.shootPlayer();
     }
-    
+
+    async do_gameStart(payload) {
+        this.#state = this.#states.PLAYING;
+        this.#ui.drawplayers(payload);
+    }
+
 }

@@ -25,6 +25,10 @@ export class ServerService {
                 type: "MOVE",
                 do: this.doMove
             },
+            {
+                type: "ROTATE",
+                do: this.doRotate
+            }
         ];
 
     private static instance: ServerService;
@@ -65,6 +69,15 @@ export class ServerService {
             socket.on('disconnect', () => {
                 console.log('Un cliente se ha desconectado:', socket.id);
             });
+
+            socket.on("MOVE", (data) => {
+                this.doMove(data);
+            });
+
+            socket.on("ROTATE", (data) => {
+               console.log("Rotación");
+               console.log(data);
+            });
         });
     }
 
@@ -102,6 +115,14 @@ export class ServerService {
     }
 
     private doMove(data: any) {
-        GameService.getInstance().movePlayer(data.playerId, data.newX, data.newY);
+        console.log("Movimiento");
+        console.log(data);
+        GameService.getInstance().movePlayer(data.content.playerId, data.content.direction);
+    }
+    
+    private doRotate(data: any) {
+        console.log("Rotación");
+        console.log(data);
+        GameService.getInstance().rotatePlayer(data.content.playerId);
     }
 }
