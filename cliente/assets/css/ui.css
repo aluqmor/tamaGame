@@ -21,14 +21,10 @@
 }
 
 .player {
-    background-color: blue;
-    color: white;          
-    font-size: 1.2rem;      
-    font-weight: bold;    
-     
-    display: flex;         
-    align-items: center; 
-    justify-content: center; 
+    background-image: url(../img/player.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; 
 }
 
 .game-container {

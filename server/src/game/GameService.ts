@@ -132,6 +132,11 @@ export class GameService {
             return;
         }
 
+        const isOccupied = room.players.some(p => p.id.id !== playerId && p.x === newX && p.y === newY);
+        if (isOccupied) {
+            return;
+        }
+
         player.x = newX;
         player.y = newY;
 

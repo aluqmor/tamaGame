@@ -32,7 +32,7 @@ UIv1.drawBoard = (board) => {
                 tile.classList.add("bush");
             } else if (element >= ELEMENTS.player1 && element <= ELEMENTS.player4) { 
                 tile.classList.add("player");
-                tile.textContent = `Player ${element}`;
+                tile.textContent = "";
             }
             base.appendChild(tile);
             anime({
@@ -58,9 +58,28 @@ UIv1.drawplayers = (players) => {
     players.forEach(player => {
         const index = player.x * boardSize + player.y;
         const tile = boardElement.children[index];
-        if (tile) {
+        if (tile && !tile.classList.contains("bush")) {
             tile.classList.add("player");
-            tile.textContent = `Player ${player.id}`;
+            tile.textContent = "";
+
+            let angle = 0;
+            switch (player.direction) {
+                case 'up':
+                    angle = 0;
+                    break;
+                case 'right':
+                    angle = 90;
+                    break;
+                case 'down':
+                    angle = 180;
+                    break;
+                case 'left':
+                    angle = 270;
+                    break;
+                default:
+                    angle = 0;
+            }
+            tile.style.transform = `rotate(${angle}deg)`;
         }
     });
     
