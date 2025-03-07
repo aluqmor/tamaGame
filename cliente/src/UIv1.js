@@ -5,12 +5,6 @@ export const UIv1 = UI_BUILDER.init();
 
 UIv1.currentBoard = null;
 
-UIv1.player = {
-    x: 0,
-    y: 0,
-    direction: 'down' 
-};
-
 UIv1.initUI = () => {
     const base = document.getElementById(UIv1.uiElements.board);
     base.classList.add("board");
@@ -87,114 +81,6 @@ UIv1.drawplayers = (players) => {
         UIv1.player = updatedLocalPlayer;
     }
 };
-UIv1.movePlayer = (payload) => {
-    if (payload && payload.x !== undefined && payload.y !== undefined) {
-        if (payload.id === ConnectionHandler.socket.id) {
-            UIv1.player.x = payload.x;
-            UIv1.player.y = payload.y;
-        }
-    }
-
-    const { x, y, direction } = UIv1.player;
-    let newX = x;
-    let newY = y;
-
-    switch (direction) {
-        case 'up':
-            newX = x - 1;
-            break;
-        case 'down':
-            newX = x + 1;
-            break;
-        case 'left':
-            newY = y - 1;
-            break;
-        case 'right':
-            newY = y + 1;
-            break;
-    }
-
-    UIv1.player.x = newX;
-    UIv1.player.y = newY;
-
-    ConnectionHandler.socket.emit("message", {
-        type: "MOVE",
-        content: { playerId: ConnectionHandler.socket.id, newX, newY }
-    });
-};
-
-UIv1.rotatePlayer = () => {
-    console.log("Rotando jugador");
-    switch(UIv1.player.direction) {
-        case 'up':
-            UIv1.player.direction = 'right';
-            break;
-        case 'right':
-            UIv1.player.direction = 'down';
-            break;
-        case 'down':
-            UIv1.player.direction = 'left';
-            break;
-        case 'left':
-            UIv1.player.direction = 'up';
-            break;
-        default:
-            UIv1.player.direction = 'down';
-    }
-    ConnectionHandler.socket.emit("message", {
-        type: "ROTATE",
-        content: {
-            playerId: ConnectionHandler.socket.id,
-            direction: UIv1.player.direction
-        }
-    });
-};
-
-UIv1.movePlayer = (payload) => {
-    console.log("Moviendo jugador");
-    if (payload && payload.x !== undefined && payload.y !== undefined) {
-        if (payload.id === ConnectionHandler.socket.id) {
-            UIv1.player.x = payload.x;
-            UIv1.player.y = payload.y;
-        }
-    }
-    
-    const { x, y, direction } = UIv1.player;
-    let newX = x;
-    let newY = y;
-    
-    switch (direction) {
-        case 'up':
-            newX = x - 1;
-            break;
-        case 'down':
-            newX = x + 1;
-            break;
-        case 'left':
-            newY = y - 1;
-            break;
-        case 'right':
-            newY = y + 1;
-            break;
-        default:
-            break;
-    }
-    
-    UIv1.player.x = newX;
-    UIv1.player.y = newY;
-    
-    ConnectionHandler.socket.emit("message", {
-        type: "MOVE",
-        content: {
-            playerId: ConnectionHandler.socket.id,
-            direction: UIv1.player.direction 
-        }
-    });
-};
-
-UIv1.shootPlayer = () => {
-    console.log("Disparando");
-}
 
 UIv1.drawControls = () => {
     const controlsContainer = document.getElementById(UIv1.uiElements.controls);
@@ -236,6 +122,7 @@ UIv1.drawControls = () => {
             type: "SHOOT",
             content: {
                 playerId: ConnectionHandler.socket.id,
+                direction: UIv1.player.direction
             }
         });
     });

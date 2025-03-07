@@ -28,6 +28,10 @@ export class ServerService {
             {
                 type: "ROTATE",
                 do: this.doRotate
+            },
+            {
+                type: "SHOOT",
+                do: this.doShoot
             }
         ];
 
@@ -124,5 +128,11 @@ export class ServerService {
         console.log("Rotación");
         console.log(data);
         GameService.getInstance().rotatePlayer(data.content.playerId);
+    }
+
+    private doShoot(data: any) {
+        console.log("Disparo");
+        console.log(data);
+        GameService.getInstance().shootPlayer(data.content.playerId, data.content.direction);
     }
 }

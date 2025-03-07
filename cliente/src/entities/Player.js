@@ -3,6 +3,5 @@ export const Player = {
     y: 0,
     status: 0,
     direction: 0,
-    visibility: true,
-    
+    visibility: true
 }

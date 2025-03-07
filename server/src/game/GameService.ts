@@ -152,7 +152,7 @@ export class GameService {
         ServerService.getInstance().sendMessage(room.name, Messages.GAME_START, playersUpdate);
     }
 
-        public rotatePlayer(playerId: string): any {
+    public rotatePlayer(playerId: string): any {
         console.log("rotate player");
         console.log(playerId);
     
@@ -193,6 +193,51 @@ export class GameService {
             visibility: p.visibility,
         }));
     
+        ServerService.getInstance().sendMessage(room.name, Messages.GAME_START, playersUpdate);
+    }
+
+    public shootPlayer(playerId: string, direction: Directions): any {
+        const room = RoomService.getInstance().getRoomByPlayerId(playerId);
+        if (!room || !room.game) return;
+
+        const player = room.players.find((p) => p.id.id === playerId);
+        if (!player) return;
+
+        let targetX = player.x;
+        let targetY = player.y;
+
+        switch (direction) {
+            case Directions.Up:
+                targetX -= 1;
+                break;
+            case Directions.Down:
+                targetX += 1;
+                break;
+            case Directions.Left:
+                targetY -= 1;
+                break;
+            case Directions.Right:
+                targetY += 1;
+                break;
+            default:
+                break;
+        }
+
+        const targetPlayer = room.players.find(p => p.x === targetX && p.y === targetY);
+        if (targetPlayer) {
+            targetPlayer.state = PlayerStates.Dead;
+            room.players = room.players.filter(p => p.id.id !== targetPlayer.id.id);
+        }
+
+        const playersUpdate = room.players.map(p => ({
+            id: p.id.id,
+            x: p.x,
+            y: p.y,
+            state: p.state,
+            direction: p.direction,
+            visibility: p.visibility,
+        }));
+
         ServerService.getInstance().sendMessage(room.name, Messages.GAME_START, playersUpdate);
     }
 
