@@ -5,7 +5,6 @@ export const UIv1 = UI_BUILDER.init();
 
 UIv1.currentBoard = null;
 
-UIv1.players = [];
 UIv1.player = {
     x: 0,
     y: 0,
