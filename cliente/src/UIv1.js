@@ -89,6 +89,7 @@ UIv1.drawplayers = (players) => {
     const updatedLocalPlayer = players.find(p => p.id === ConnectionHandler.socket.id);
     const delControls = document.getElementById(UIv1.uiElements.controls);
     let deadMsg = document.getElementById("deadMessage");
+    let winMsg = document.getElementById("winMessage");
 
     if (updatedLocalPlayer) {
         UIv1.player = updatedLocalPlayer;
@@ -102,7 +103,24 @@ UIv1.drawplayers = (players) => {
             }
         } else {
             delControls.style.display = "";
-            if (deadMsg) deadMsg.remove();
+            if (deadMsg) {
+                deadMsg.remove();
+            }
+            const alivePlayers = players.filter(p => p.state !== 4);
+            if (alivePlayers.length === 1 && alivePlayers[0].id === updatedLocalPlayer.id) {
+                delControls.style.display = "none";
+                if (!winMsg) {
+                    winMsg = document.createElement("div");
+                    winMsg.id = "winMessage";
+                    winMsg.textContent = "Has ganado!";
+                    document.body.appendChild(winMsg);
+                }
+            } else {
+                delControls.style.display = "";
+                if (winMsg) {
+                    winMsg.remove();
+                }
+            }
         }
     }
 };

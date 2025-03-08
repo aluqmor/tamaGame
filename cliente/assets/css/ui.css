@@ -75,3 +75,14 @@
     color: #080808;
     z-index: 2000;
 }
+
+#winMessage {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: green;
+    font-size: 4rem;
+    z-index: 2000;
+    font-weight: 600;
+}
