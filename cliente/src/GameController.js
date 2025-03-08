@@ -8,7 +8,6 @@ export class GameController {
     };
     #state = null;
     #gameService = null;
-    #players = [];
 
     constructor(url, ui) {
         ui.initUI();
@@ -24,19 +23,5 @@ export class GameController {
         if (this.#state === this.#states.RIGHT)
             this.#gameService.do(payload);
     }
-
-    getPlayers() {
-        return this.#players;
-    }
-
-    addPlayer(player) {
-        this.#players.push(player);
-    }
-
-    updatePlayer(player) {
-        const index = this.#players.findIndex(p => p.id === player.id);
-        if (index !== -1) {
-            this.#players[index] = player;
-        }
-    }
+    
 }

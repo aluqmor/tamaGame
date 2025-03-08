@@ -1,4 +1,3 @@
-import { Player } from "../../player/entities/Player";
 export interface BushElement {
     x: number;
     y: number;

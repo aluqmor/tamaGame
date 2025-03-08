@@ -1,7 +1,6 @@
 import { DefaultEventsMap, Server, Socket } from 'socket.io';
 import http from 'http';
 import { GameService } from '../game/GameService';
-import { RoomService } from '../room/RoomService';
 
 export class ServerService {
     private io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any> | null;

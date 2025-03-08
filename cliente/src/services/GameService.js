@@ -60,14 +60,6 @@ export class GameService {
     async do_newPlayer (payload) {
         console.log("payload: ", payload);
         console.log("ha llegado un jugador nuevo");
-        this.#ui.players.push({
-            id: payload.id,
-            x: 0,
-            y: 0,
-            direction: payload.direction,
-            visibility: payload.visibility,
-            state :payload.state
-        });
     };
 
     async do_newBoard(payload) {

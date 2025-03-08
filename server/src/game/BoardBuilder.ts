@@ -2,6 +2,8 @@ import { Board } from '../game/entities/Board';
 export class BoardBuilder {
     private board: Board;
     private initialPlayerPositions: Array<{ x: number, y: number }>;
+    // he creado otra variable privada para que cuando se han asignado todas las posiciones disponibles en initialPlayerPositions
+    // siempre existan posiciones disponibles para asignar a los jugadores (cuando la pagina se recarga)
     private defaultPlayerPositions: Array<{ x: number, y: number }>;
 
     constructor() {

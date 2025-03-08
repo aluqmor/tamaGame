@@ -93,15 +93,13 @@ export class GameService {
     }
 
     public movePlayer(playerId: string, direction: Directions): any {
-        console.log("move player");
-        console.log(playerId);
+        console.log(`Mover jugador: ${playerId}`);
 
         const room = RoomService.getInstance().getRoomByPlayerId(playerId);
         if (!room || !room.game) return;
 
         const player = room.players.find((p) => p.id.id === playerId);
         if (!player) return;
-        console.log("player found");
         console.log(direction);
 
         player.direction = direction;
@@ -128,10 +126,10 @@ export class GameService {
         }
 
         if (newX < 0 || newX >= boardSize || newY < 0 || newY >= boardSize) {
-            console.log("Movimiento fuera de límites. No se actualiza posición.");
             return;
         }
 
+        // si la casilla a la que se quiere mover está ocupada, no se mueve
         const isOccupied = room.players.some(p => p.id.id !== playerId && p.x === newX && p.y === newY);
         if (isOccupied) {
             return;
@@ -153,16 +151,13 @@ export class GameService {
     }
 
     public rotatePlayer(playerId: string): any {
-        console.log("rotate player");
-        console.log(playerId);
+        console.log(`Rotar jugador: ${playerId}`);
     
         const room = RoomService.getInstance().getRoomByPlayerId(playerId);
         if (!room || !room.game) return;
     
         const player = room.players.find((p) => p.id.id === playerId);
         if (!player) return;
-        console.log("player found");
-        console.log("Current direction:", player.direction);
     
         switch (player.direction) {
             case Directions.Up:
@@ -182,7 +177,7 @@ export class GameService {
                 break;
         }
     
-        console.log("New direction:", player.direction);
+        console.log(player.direction);
     
         const playersUpdate = room.players.map(p => ({
             id: p.id.id,
@@ -197,6 +192,8 @@ export class GameService {
     }
 
     public shootPlayer(playerId: string, direction: Directions): any {
+        console.log(`Disparar: ${playerId}`);
+
         const room = RoomService.getInstance().getRoomByPlayerId(playerId);
         if (!room || !room.game) return;
 
@@ -224,6 +221,7 @@ export class GameService {
         }
 
         const targetPlayer = room.players.find(p => p.x === targetX && p.y === targetY);
+        // si encuentra al jugador, le cambia el estad a muerto y lo elimina de la lista de jugadores (usando filter)
         if (targetPlayer) {
             targetPlayer.state = PlayerStates.Dead;
             room.players = room.players.filter(p => p.id.id !== targetPlayer.id.id);

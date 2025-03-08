@@ -1,9 +1,5 @@
 export const ELEMENTS = {
-    bush : 5,
-    player1: 1,
-    player2: 2,
-    player3: 3,
-    player4: 4 
+     bush : 5
 };
 
 export class Board {
@@ -24,9 +20,7 @@ export class Board {
         elements.forEach(element => {
             if (element.type === 'bush') {
                 this.#map[element.x][element.y] = ELEMENTS.bush;
-            } else if (element.type === 'player') {
-                this.#map[element.x][element.y] = element.player;
-            }
+            } 
         });
         this.#state = this.#states.BUILD;
     }

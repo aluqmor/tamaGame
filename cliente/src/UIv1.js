@@ -25,7 +25,6 @@ UIv1.drawBoard = (board) => {
                 tile.classList.add("bush");
             } else if (element >= ELEMENTS.player1 && element <= ELEMENTS.player4) { 
                 tile.classList.add("player");
-                tile.textContent = "";
             }
             base.appendChild(tile);
             anime({
@@ -45,7 +44,6 @@ UIv1.drawplayers = (players) => {
     
     Array.from(boardElement.children).forEach(tile => {
         tile.classList.remove("player");
-        tile.textContent = "";
     });
     
     players.forEach(player => {
@@ -53,7 +51,6 @@ UIv1.drawplayers = (players) => {
         const tile = boardElement.children[index];
         if (tile && !tile.classList.contains("bush")) {
             tile.classList.add("player");
-            tile.textContent = "";
 
             let angle = 0;
             switch (player.direction) {
@@ -118,6 +115,7 @@ UIv1.drawControls = () => {
     shootButton.textContent = "Disparar";
     shootButton.classList.add("control-button");
     shootButton.addEventListener("click", () => {
+        console.log("Disparando");
         ConnectionHandler.socket.emit("message", {
             type: "SHOOT",
             content: {

@@ -36,7 +36,7 @@ export class RoomService {
     public getRoomByPlayerId(id: string): Room | null {
         const roomOfPlayer = this.rooms.find(room => room.players.some(player => player.id?.id === id));
         if (roomOfPlayer) return roomOfPlayer;
-        console.log("Room not found for player id:", id);
+        console.log("Sala no encontrada para el jugador:", id);
         return null;
     }
 
