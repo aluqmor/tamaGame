@@ -65,3 +65,13 @@
     z-index: 2000;
     font-weight: 600;
 }
+
+#waitingMessage {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: #080808;
+    z-index: 2000;
+}

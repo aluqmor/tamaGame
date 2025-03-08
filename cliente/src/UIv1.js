@@ -8,7 +8,15 @@ UIv1.currentBoard = null;
 UIv1.initUI = () => {
     const base = document.getElementById(UIv1.uiElements.board);
     base.classList.add("board");
+    UIv1.waitingMessage();
     UIv1.drawControls();
+}
+
+UIv1.waitingMessage = () => {
+    const message = document.createElement("div");
+    message.id = "waitingMessage";
+    message.textContent = "Esperando jugadores...";
+    document.body.appendChild(message);
 }
 
 UIv1.drawBoard = (board) => {
@@ -34,6 +42,10 @@ UIv1.drawBoard = (board) => {
                 easing: 'easeInOutQuad'
             });
         }));
+        const waiting = document.getElementById("waitingMessage");
+        if (waiting) {
+            waiting.remove();
+        }
     }
 }
 
