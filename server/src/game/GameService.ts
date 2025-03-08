@@ -221,10 +221,9 @@ export class GameService {
         }
 
         const targetPlayer = room.players.find(p => p.x === targetX && p.y === targetY);
-        // si encuentra al jugador, le cambia el estad a muerto y lo elimina de la lista de jugadores (usando filter)
+        // si encuentra al jugador, le cambia el estado a muerto
         if (targetPlayer) {
             targetPlayer.state = PlayerStates.Dead;
-            room.players = room.players.filter(p => p.id.id !== targetPlayer.id.id);
         }
 
         const playersUpdate = room.players.map(p => ({

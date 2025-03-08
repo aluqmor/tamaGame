@@ -47,6 +47,7 @@ UIv1.drawplayers = (players) => {
     });
     
     players.forEach(player => {
+        if (player.state === 4) return;
         const index = player.x * boardSize + player.y;
         const tile = boardElement.children[index];
         if (tile && !tile.classList.contains("bush")) {
@@ -74,8 +75,23 @@ UIv1.drawplayers = (players) => {
     });
     
     const updatedLocalPlayer = players.find(p => p.id === ConnectionHandler.socket.id);
+    const delControls = document.getElementById(UIv1.uiElements.controls);
+    let deadMsg = document.getElementById("deadMessage");
+
     if (updatedLocalPlayer) {
         UIv1.player = updatedLocalPlayer;
+        if (updatedLocalPlayer.state === 4) {
+            delControls.style.display = "none";
+            if (!deadMsg) {
+                deadMsg = document.createElement("div");
+                deadMsg.id = "deadMessage";
+                deadMsg.textContent = "Eliminado";
+                document.body.appendChild(deadMsg);
+            }
+        } else {
+            delControls.style.display = "";
+            if (deadMsg) deadMsg.remove();
+        }
     }
 };
 
